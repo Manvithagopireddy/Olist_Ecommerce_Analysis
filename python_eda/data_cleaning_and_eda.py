@@ -4,7 +4,7 @@ full_eda_analysis.py
 Complete end-to-end EDA for the Olist E-Commerce dataset.
 Generates all charts needed for the portfolio project.
 
-Run: .\venv\Scripts\python python_eda\full_eda_analysis.py
+Run: venv/Scripts/python python_eda/data_cleaning_and_eda.py
 """
 
 import pandas as pd
@@ -120,7 +120,7 @@ plt.tight_layout()
 path = os.path.join(OUTPUT_DIR, '01_monthly_revenue_trend.png')
 plt.savefig(path, dpi=150)
 plt.close()
-print(f"  Saved → {path}")
+print(f"  Saved -> {path}")
 
 # ─────────────────────────────────────────────
 # 4. CHART 2 — Review Score Distribution
@@ -142,23 +142,25 @@ plt.tight_layout()
 path = os.path.join(OUTPUT_DIR, '02_review_score_distribution.png')
 plt.savefig(path, dpi=150)
 plt.close()
-print(f"  Saved → {path}")
+print(f"  Saved -> {path}")
 
 # ─────────────────────────────────────────────
 # 5. CHART 3 — Delivery Time vs Review Score (KEY INSIGHT)
 # ─────────────────────────────────────────────
 print("Generating Chart 3: Delivery Time vs Review Score ...")
 
-df_plot = df[(df['delivery_days'] > 0) & (df['delivery_days'] < 60) & df['review_score'].notna()]
+df_plot = df[(df['delivery_days'] > 0) & (df['delivery_days'] < 60) & df['review_score'].notna()].copy()
+df_plot['review_score'] = df_plot['review_score'].astype(int)
 
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.boxplot(x='review_score', y='delivery_days', data=df_plot,
-            palette='RdYlGn', order=[1,2,3,4,5], ax=ax)
+            hue='review_score', palette='RdYlGn', order=[1,2,3,4,5],
+            legend=False, ax=ax)
 ax.set_title('Impact of Delivery Time on Customer Review Score\n(Key Business Insight)',
              fontsize=14, fontweight='bold', pad=10)
 ax.set_xlabel('Review Score')
 ax.set_ylabel('Delivery Time (Days)')
-ax.annotate('Longer delivery → Lower scores',
+ax.annotate('Longer delivery = Lower scores',
             xy=(0, df_plot[df_plot['review_score']==1]['delivery_days'].median()),
             xytext=(1.5, 40),
             arrowprops=dict(arrowstyle='->', color='#C44E52'),
@@ -167,7 +169,7 @@ plt.tight_layout()
 path = os.path.join(OUTPUT_DIR, '03_delivery_vs_review.png')
 plt.savefig(path, dpi=150)
 plt.close()
-print(f"  Saved → {path}")
+print(f"  Saved -> {path}")
 
 # ─────────────────────────────────────────────
 # 6. CHART 4 — Top 10 Revenue Categories
@@ -196,7 +198,7 @@ plt.tight_layout()
 path = os.path.join(OUTPUT_DIR, '04_top10_categories_revenue.png')
 plt.savefig(path, dpi=150)
 plt.close()
-print(f"  Saved → {path}")
+print(f"  Saved -> {path}")
 
 # ─────────────────────────────────────────────
 # 7. CHART 5 — Late vs On-Time delivery impact
@@ -224,7 +226,7 @@ plt.tight_layout()
 path = os.path.join(OUTPUT_DIR, '05_ontime_vs_late_reviews.png')
 plt.savefig(path, dpi=150)
 plt.close()
-print(f"  Saved → {path}")
+print(f"  Saved -> {path}")
 
 # ─────────────────────────────────────────────
 # 8. CHART 6 — Orders by State
@@ -249,7 +251,7 @@ plt.tight_layout()
 path = os.path.join(OUTPUT_DIR, '06_orders_by_state.png')
 plt.savefig(path, dpi=150)
 plt.close()
-print(f"  Saved → {path}")
+print(f"  Saved -> {path}")
 
 # ─────────────────────────────────────────────
 # 9. SUMMARY STATS (for README)

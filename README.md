@@ -46,12 +46,12 @@ As a Data Analyst hired by Olist — the largest Brazilian e-commerce marketplac
 
 | Metric | Value |
 |---|---|
-| Total Revenue | BRL ~13.5 Million |
-| Total Delivered Orders | ~96,000 |
-| Average Order Value | ~BRL 141 |
-| Average Delivery Time | ~12 days |
-| Average Review Score | 4.09 / 5.00 |
-| % Late Deliveries | ~8% |
+| Total Revenue | **BRL 19,880,566** |
+| Total Delivered Orders | **96,470** |
+| Average Order Value | **BRL 206.08** |
+| Average Delivery Time | **12.0 days** |
+| Average Review Score | **4.08 / 5.00** |
+| % Late Deliveries | **7.8%** |
 
 ---
 
