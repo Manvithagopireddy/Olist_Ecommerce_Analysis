@@ -108,10 +108,25 @@ Olist_Ecommerce_Analysis/
 
 ---
 
-## 📸 Dashboard Preview
+## 📸 Analysis Charts
 
-*(Screenshot of your Power BI dashboard goes here)*
-![Dashboard Preview](charts/dashboard_screenshot.png)
+### Monthly Revenue Trend (2016–2018)
+![Monthly Revenue Trend](charts/01_monthly_revenue_trend.png)
+
+### Key Insight: Delivery Time vs Customer Review Score
+![Delivery vs Review](charts/03_delivery_vs_review.png)
+
+### On-Time vs Late Delivery — Review Score Comparison
+![On-Time vs Late](charts/05_ontime_vs_late_reviews.png)
+
+### Top 10 Product Categories by Revenue
+![Top Categories](charts/04_top10_categories_revenue.png)
+
+### Customer Review Score Distribution
+![Review Distribution](charts/02_review_score_distribution.png)
+
+### Orders by State (Top 10)
+![Orders by State](charts/06_orders_by_state.png)
 
 ---
 
