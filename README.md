@@ -8,6 +8,19 @@
 
 **🔗 Live Dashboard:** [Click here to view the Interactive Power BI Dashboard](#) *(Replace `#` with your published link)*
 
+
+---
+
+## 📊 Executive Power BI Dashboard
+
+![Olist Executive Dashboard](dashboard/dashboard_screenshot.png)
+
+An executive dashboard built in Power BI Desktop tracking critical marketplace health metrics:
+- **Executive KPIs:** Total Revenue (**16.01M BRL**), Total Orders (**99.44K**), and Average Customer Rating (**4.09 / 5.0 ⭐**).
+- **Revenue Trajectory:** Growth curve across 2016–2018.
+- **Customer Satisfaction:** Review score distribution showing heavy positive skew (5-star dominance).
+- **Payment Method Dominance:** Credit card installments account for **78.3%** of total transaction volume, followed by Boleto at **17.9%**.
+
 ---
 
 ## 📌 Business Problem
