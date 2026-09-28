@@ -1,0 +1,21 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+
+# Data files — too large for GitHub
+data/
+*.csv
+*.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Power BI (optional — uncomment to exclude the .pbix too)
+# dashboard/*.pbix
