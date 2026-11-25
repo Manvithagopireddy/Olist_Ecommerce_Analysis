@@ -6,7 +6,7 @@
 ![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-yellow?logo=powerbi)
 ![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
 
-**🔗 Live Dashboard:** [Click here to view the Interactive Power BI Dashboard](#) *(Replace `#` with your published link)*
+**Dashboard:** Power BI Desktop report and screenshot are documented below; no hosted dashboard is linked.
 
 
 ---
@@ -27,7 +27,7 @@ An executive dashboard built in Power BI Desktop tracking critical marketplace h
 
 > *"Olist wants to understand why customer satisfaction scores are fluctuating, and where logistics bottlenecks are hurting revenue and repeat purchases."*
 
-As a Data Analyst hired by Olist — the largest Brazilian e-commerce marketplace — I was asked to:
+This independent portfolio case study uses the public Olist dataset to explore the following analytical questions:
 - Identify **what drives customer satisfaction** (or dissatisfaction)
 - Pinpoint **geographic and logistical inefficiencies** hurting delivery performance
 - Uncover **product category trends** to guide inventory and marketing decisions
@@ -55,7 +55,9 @@ As a Data Analyst hired by Olist — the largest Brazilian e-commerce marketplac
 
 ---
 
-## 📊 Key Metrics (After Analysis)
+## 📊 Key Metrics (Exploratory Analysis)
+
+The dashboard and exploratory analysis report different totals. Their filters, revenue definitions and aggregation grain have not yet been reconciled; treat these figures as provisional, not interchangeable or audited.
 
 | Metric | Value |
 |---|---|
@@ -68,11 +70,13 @@ As a Data Analyst hired by Olist — the largest Brazilian e-commerce marketplac
 
 ---
 
-## 🚀 Key Business Insights & Recommendations
+## 🚀 Exploratory Findings & Recommendations
+
+These are candidate findings and proposed interventions, not measured causal effects. Validate the underlying queries and metric definitions before using them for business decisions.
 
 ### 1. 📦 Late Deliveries Tank Customer Satisfaction
 - **Insight:** On-time deliveries average **4.3/5.0** in review scores. Late deliveries crash to **2.1/5.0** — a **51% drop**.
-- **Recommendation:** Add a 2-day buffer to estimated delivery dates for rural and northern states to convert "late" to "on-time" in the customer's perception.
+- **Recommendation:** Add a 2-day buffer to estimated delivery dates for rural and northern states to improve estimate accuracy; measure actual delivery performance separately.
 
 ### 2. 🗺️ Geographic Concentration Creates Risk
 - **Insight:** **65% of all orders** come from São Paulo (SP) alone. Freight costs to northern states are up to **3× higher**, suppressing demand.
@@ -147,7 +151,7 @@ Olist_Ecommerce_Analysis/
 
 ### Step 1: Clone the repo
 ```bash
-git clone https://github.com/YOUR_USERNAME/Olist_Ecommerce_Analysis.git
+git clone https://github.com/Manvithagopireddy/Olist_Ecommerce_Analysis.git
 cd Olist_Ecommerce_Analysis
 ```
 
@@ -182,4 +186,4 @@ Open `dashboard/olist_performance.pbix` in [Power BI Desktop](https://powerbi.mi
 
 This project was built as part of my data analyst portfolio to demonstrate end-to-end analytical skills including data wrangling, SQL querying, EDA, and business storytelling through visualization.
 
-**Connect with me on LinkedIn:** [Your LinkedIn URL]
+**Connect with me on LinkedIn:** [LinkedIn](https://www.linkedin.com/in/gopireddymanvitha/)
