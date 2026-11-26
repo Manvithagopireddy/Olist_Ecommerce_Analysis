@@ -1,0 +1,40 @@
+name: Dashboard and Docker runtime
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-app.txt
+      - name: Prepare synthetic database
+        run: PYTHONPATH=. python tests/runtime_fixture.py
+      - name: Execute dashboard and assert metrics
+        run: PYTHONPATH=. python tests/dashboard_smoke.py
+      - name: Build Docker image
+        run: docker compose build
+      - name: Start container
+        run: docker compose up -d
+      - name: Check HTTP readiness
+        run: |
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8501/_stcore/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Execute dashboard inside container
+        run: docker compose exec -T -e PYTHONPATH=/app dashboard python tests/dashboard_smoke.py
+      - name: Container diagnostics and cleanup
+        if: always()
+        run: |
+          docker compose logs
+          docker compose down
