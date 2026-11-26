@@ -3,6 +3,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 from analytics_core import ORDER_FACT
+from advanced_analytics import rfm as segment_customers, predict_late
 
 st.set_page_config(page_title="Olist Marketplace Intelligence", layout="wide")
 st.title("Olist Marketplace Intelligence")
@@ -34,13 +35,17 @@ monthly = df.set_index("date").payment_total.resample("MS").sum()
 st.subheader("Monthly customer payments")
 st.line_chart(monthly)
 st.subheader("Customer segmentation")
-rfm = df.groupby("customer_unique_id").agg(last=("date","max"), frequency=("order_id","nunique"), monetary=("payment_total","sum"))
-rfm["recency"] = (df.date.max().normalize() + pd.Timedelta(days=1) - rfm["last"].dt.normalize()).dt.days
-rfm["segment"] = "Single purchase"
-rfm.loc[rfm.frequency.gt(1), "segment"] = "Repeat purchase"
-st.bar_chart(rfm.groupby("segment").monetary.sum())
+rfm = segment_customers(df)
+st.caption("Segments use the selected period's end and population.")
+st.bar_chart(rfm.groupby("segment").size())
+st.dataframe(rfm.groupby("segment").agg(customers=("frequency","size"), payments=("monetary","sum")))
 st.metric("Repeat customer share", f"{rfm.frequency.gt(1).mean():.1%}")
 st.download_button("Download customer metrics", rfm.to_csv(), "customer_metrics.csv")
+st.subheader("Historical late-delivery prediction")
+if st.button("Evaluate model on full dataset"):
+    with st.spinner("Training chronological holdout model"):
+        with sqlite3.connect(db) as conn:
+            st.json(predict_late(conn))
 st.subheader("Delivery performance by state")
 st.dataframe(df.groupby("customer_state").agg(orders=("order_id","size"), late_fraction=("late","mean"), review=("review_score","mean")))
 st.subheader("Forecast baseline")

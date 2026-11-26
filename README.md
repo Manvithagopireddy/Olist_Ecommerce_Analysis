@@ -4,7 +4,7 @@
 ![SQL](https://img.shields.io/badge/SQL-SQLite%20%7C%20PostgreSQL-orange?logo=sqlite)
 ![Pandas](https://img.shields.io/badge/Pandas-3.0-green?logo=pandas)
 ![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-yellow?logo=powerbi)
-![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
+![Status](https://img.shields.io/badge/Status-In%20validation-yellow)
 
 **Dashboard:** Power BI Desktop report and screenshot are documented below; no hosted dashboard is linked.
 
@@ -61,12 +61,12 @@ The dashboard and exploratory analysis report different totals. Their filters, r
 
 | Metric | Value |
 |---|---|
-| Total Revenue | **BRL 19,880,566** |
-| Total Delivered Orders | **96,470** |
-| Average Order Value | **BRL 206.08** |
-| Average Delivery Time | **12.0 days** |
-| Average Review Score | **4.08 / 5.00** |
-| % Late Deliveries | **7.8%** |
+| Total Revenue | **BRL 15,422,461.77 (delivered payments)** |
+| Total Delivered Orders | **96,478** |
+| Average Order Value | Pending reconciliation |
+| Average Delivery Time | Pending reconciliation |
+| Average Review Score | Pending reconciliation |
+| % Late Deliveries | Pending reconciliation |
 
 ---
 
@@ -187,3 +187,7 @@ Open `dashboard/olist_performance.pbix` in [Power BI Desktop](https://powerbi.mi
 This project was built as part of my data analyst portfolio to demonstrate end-to-end analytical skills including data wrangling, SQL querying, EDA, and business storytelling through visualization.
 
 **Connect with me on LinkedIn:** [LinkedIn](https://www.linkedin.com/in/gopireddymanvitha/)
+
+## Reproducible analytics upgrade
+
+Install application dependencies: `python -m pip install -r requirements-app.txt`. Place the nine source CSVs in data/ and run `python pipeline.py`, then `streamlit run dashboard_app.py`. For a local container, run `docker compose up --build` after ingestion and visit http://localhost:8501. See [Power BI reconciliation](docs/power_bi_upgrade.md). The historical snapshot contains 99,441 orders; recorded payments are BRL 16,008,872.12 across all statuses and BRL 15,422,461.77 for delivered orders. The local validation checked keys, relationships, monetary fields and review scores; SQLite integrity check returned ok. A chronological late-delivery logistic regression holdout achieved ROC-AUC 0.7065 and average precision 0.1225 (19,363 test orders, cutoff 2018-05-26). These are exploratory retrospective results, not production performance guarantees. Container build, hosted deployment and PBIX edits are not yet verified.
