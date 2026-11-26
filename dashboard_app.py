@@ -3,14 +3,23 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 from analytics_core import ORDER_FACT
+from dataset_init import ensure_database
 from advanced_analytics import rfm as segment_customers, predict_late
 
 st.set_page_config(page_title="Olist Marketplace Intelligence", layout="wide")
 st.title("Olist Marketplace Intelligence")
-db = Path("data/olist.db")
-if not db.exists():
-    st.error("Run python pipeline.py --download before starting the dashboard.")
-    st.stop()
+db = Path(__file__).resolve().parent / "data" / "olist.db"
+if not db.is_file():
+    with st.spinner("Preparing the public Olist dataset. First startup downloads and validates the source files."):
+        try:
+            ensure_database(db)
+        except Exception:
+            import logging
+            logging.exception("Dataset initialization failed")
+            st.error("Dataset initialization failed. Check the application logs and Kaggle source access.")
+            if st.button("Retry initialization"):
+                st.rerun()
+            st.stop()
 with sqlite3.connect(db) as conn:
     df = pd.read_sql_query(ORDER_FACT, conn)
 df = df[df.order_status.eq("delivered")].copy()
