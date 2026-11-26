@@ -32,9 +32,7 @@ jobs:
           done
           exit 1
       - name: Execute dashboard inside container
-        run: docker compose exec -T dashboard python tests/dashboard_smoke.py
-        env:
-          PYTHONPATH: .
+        run: docker compose exec -T -e PYTHONPATH=/app dashboard python tests/dashboard_smoke.py
       - name: Container diagnostics and cleanup
         if: always()
         run: |
