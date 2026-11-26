@@ -82,6 +82,8 @@ def build(data_dir, output):
                 conn.execute(f"CREATE INDEX IF NOT EXISTS ix_{child}_{field} ON {child} ({field})")
             conn.execute("CREATE TABLE ingestion_manifest (table_name TEXT PRIMARY KEY, metadata TEXT NOT NULL)")
             conn.executemany("INSERT INTO ingestion_manifest VALUES (?, ?)", [(k, json.dumps(v, sort_keys=True)) for k, v in manifest.items()])
+            conn.execute("CREATE INDEX IF NOT EXISTS ix_orders_status_purchase ON orders(order_status, order_purchase_timestamp)")
+            conn.execute("ANALYZE")
             conn.commit()
         finally:
             conn.close()
