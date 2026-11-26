@@ -6,7 +6,11 @@
 ![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-yellow?logo=powerbi)
 ![Status](https://img.shields.io/badge/Status-In%20validation-yellow)
 
-**Dashboard:** Power BI Desktop report and screenshot are documented below; no hosted dashboard is linked.
+**Live dashboard:** [Launch Olist Marketplace Intelligence](https://olist-marketplace-intelligence.streamlit.app/) — interactive sales, logistics, customer segmentation and historical delivery-risk analytics.
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://olist-marketplace-intelligence.streamlit.app/)
+
+The original Power BI Desktop report and screenshot are documented below.
 
 
 ---
@@ -190,7 +194,7 @@ This project was built as part of my data analyst portfolio to demonstrate end-t
 
 ## Reproducible analytics upgrade
 
-Install application dependencies: `python -m pip install -r requirements-app.txt`. Place the nine source CSVs in data/ and run `python pipeline.py`, then `streamlit run dashboard_app.py`. For a local container, run `docker compose up --build` after ingestion and visit http://localhost:8501. See [Power BI reconciliation](docs/power_bi_upgrade.md). The historical snapshot contains 99,441 orders; recorded payments are BRL 16,008,872.12 across all statuses and BRL 15,422,461.77 for delivered orders. The local validation checked keys, relationships, monetary fields and review scores; SQLite integrity check returned ok. A chronological late-delivery logistic regression holdout achieved ROC-AUC 0.7065 and average precision 0.1225 (19,363 test orders, cutoff 2018-05-26). These are exploratory retrospective results, not production performance guarantees. Container build and synthetic dashboard runtime passed in CI; hosted deployment and PBIX edits are not yet verified.
+Install application dependencies: `python -m pip install -r requirements-app.txt`. Place the nine source CSVs in data/ and run `python pipeline.py`, then `streamlit run dashboard_app.py`. For a local container, run `docker compose up --build` after ingestion and visit http://localhost:8501. See [Power BI reconciliation](docs/power_bi_upgrade.md). The historical snapshot contains 99,441 orders; recorded payments are BRL 16,008,872.12 across all statuses and BRL 15,422,461.77 for delivered orders. The local validation checked keys, relationships, monetary fields and review scores; SQLite integrity check returned ok. A chronological late-delivery logistic regression holdout achieved ROC-AUC 0.7065 and average precision 0.1225 (19,363 test orders, cutoff 2018-05-26). These are exploratory retrospective results, not production performance guarantees. Container build and synthetic dashboard runtime passed in CI; the dashboard has been deployed to Streamlit Cloud (owner-confirmed startup); independent public access verification and PBIX edits remain pending.
 
 ## Streamlit Community Cloud
-Deploy the main branch with entrypoint `dashboard_app.py` and Python 3.12. The root requirements file includes the shared app dependencies. When the database is absent, the application uses local CSVs if present or downloads the public Olist dataset via KaggleHub, then runs validated ETL. The database is reused on subsequent requests while the filesystem persists. Cold starts depend on Kaggle availability and host disk/memory limits. Do not commit credentials or raw data. If Kaggle requires authentication, configure credentials securely through the hosting service or use an approved data source; never commit secrets. Public deployment is not verified until the hosted application renders the actual dataset.
+Deploy the main branch with entrypoint `dashboard_app.py` and Python 3.12. The root requirements file includes the shared app dependencies. When the database is absent, the application uses local CSVs if present or downloads the public Olist dataset via KaggleHub, then runs validated ETL. The database is reused on subsequent requests while the filesystem persists. Cold starts depend on Kaggle availability and host disk/memory limits. Do not commit credentials or raw data. If Kaggle requires authentication, configure credentials securely through the hosting service or use an approved data source; never commit secrets. The owner confirmed that the deployed application renders 96,478 delivered orders and approximately BRL 15.42 million in delivered-order payments. Independent anonymous access testing remains pending.
